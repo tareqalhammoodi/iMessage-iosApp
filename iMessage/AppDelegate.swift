@@ -10,10 +10,27 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // change arrow color of NavBar
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        let proxy = UINavigationBar.appearance()
+        proxy.tintColor = .black
+        proxy.standardAppearance = appearance
+        proxy.scrollEdgeAppearance = appearance
+        
+        // hide back button of NavBar
+        let navigationBarAppearance = UINavigationBarAppearance()
+        let backButtonAppearance = UIBarButtonItemAppearance(style: .plain)
+        backButtonAppearance.focused.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        backButtonAppearance.disabled.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        backButtonAppearance.highlighted.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        backButtonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
+        navigationBarAppearance.backButtonAppearance = backButtonAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        
         return true
     }
 
