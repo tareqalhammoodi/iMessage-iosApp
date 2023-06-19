@@ -7,4 +7,8 @@ target 'iMessage' do
 
   # Pods for iMessage
 
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+
 end

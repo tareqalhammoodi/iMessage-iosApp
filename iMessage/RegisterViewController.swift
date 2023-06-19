@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
 
@@ -35,30 +36,19 @@ class RegisterViewController: UIViewController {
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "userIcon")
+        imageView.image = UIImage(systemName: "person.crop.circle")
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
+        imageView.tintColor = .gray
         return imageView
     }()
 
-    private let firstNameField: UITextField = {
+    private let NameField: UITextField = {
         let field = UITextField()
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .continue
-        field.attributedPlaceholder = NSAttributedString(string: "First Name", attributes: [NSAttributedString.Key.font: UIFont(name:"Avenir-Light", size: 16.0) as Any])
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
-        field.leftViewMode = .always
-        field.backgroundColor = .clear
-        return field
-    }()
-
-    private let lastNameField: UITextField = {
-        let field = UITextField()
-        field.autocapitalizationType = .none
-        field.autocorrectionType = .no
-        field.returnKeyType = .continue
-        field.attributedPlaceholder = NSAttributedString(string: "Last Name", attributes: [NSAttributedString.Key.font: UIFont(name:"Avenir-Light", size: 16.0) as Any])
+        field.attributedPlaceholder = NSAttributedString(string: "Name and Surname", attributes: [NSAttributedString.Key.font: UIFont(name:"Avenir-Light", size: 16.0) as Any])
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 0))
         field.leftViewMode = .always
         field.backgroundColor = .clear
@@ -117,8 +107,7 @@ class RegisterViewController: UIViewController {
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(tLabel)
         scrollView.addSubview(imageView)
-        scrollView.addSubview(firstNameField)
-        scrollView.addSubview(lastNameField)
+        scrollView.addSubview(NameField)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(registerButton)
@@ -129,10 +118,6 @@ class RegisterViewController: UIViewController {
         let gesture = UITapGestureRecognizer(target: self,
                                              action: #selector(didTapChangeProfilePic))
         imageView.addGestureRecognizer(gesture)
-    }
-
-    @objc private func didTapChangeProfilePic() {
-        presentPhotoActionSheet()
     }
 
     override func viewDidLayoutSubviews() {
@@ -156,16 +141,12 @@ class RegisterViewController: UIViewController {
 
         imageView.layer.cornerRadius = imageView.width/2.0
 
-        firstNameField.frame = CGRect(x: 30,
+        NameField.frame = CGRect(x: 30,
                                   y: imageView.bottom+10,
                                   width: scrollView.width-60,
                                   height: 35)
-        lastNameField.frame = CGRect(x: 30,
-                                  y: firstNameField.bottom+20,
-                                  width: scrollView.width-60,
-                                  height: 35)
         emailField.frame = CGRect(x: 30,
-                                  y: lastNameField.bottom+20,
+                                  y: NameField.bottom+20,
                                   width: scrollView.width-60,
                                   height: 35)
         passwordField.frame = CGRect(x: 30,
@@ -177,31 +158,56 @@ class RegisterViewController: UIViewController {
                                    width: scrollView.width-60,
                                    height: 45)
         
-        firstNameField.addBottomBorder(color: .gray, width: 0.5)
-        lastNameField.addBottomBorder(color: .gray, width: 0.5)
+        NameField.addBottomBorder(color: .gray, width: 0.5)
         emailField.addBottomBorder(color: .gray, width: 0.5)
         passwordField.addBottomBorder(color: .gray, width: 0.5)
 
     }
-
+    
     @objc private func registerButtonTapped() {
         emailField.resignFirstResponder()
         passwordField.resignFirstResponder()
-        firstNameField.resignFirstResponder()
-        lastNameField.resignFirstResponder()
-
-        guard let firstName = firstNameField.text,
-            let lastName = lastNameField.text,
-            let email = emailField.text,
-            let password = passwordField.text,
-            !email.isEmpty,
-            !password.isEmpty,
-            !firstName.isEmpty,
-            !lastName.isEmpty,
-            password.count >= 6 else {
-                alertUserLoginError()
-                return
+        NameField.resignFirstResponder()
+        
+        guard let Name = NameField.text,
+              let emailAddress = emailField.text,
+              let password = passwordField.text,
+              !emailAddress.isEmpty,
+              !password.isEmpty,
+              !Name.isEmpty,
+              password.count >= 6 else {
+            alertUserLoginError()
+            return
         }
+        
+        // Firebase Register
+        
+        DatabaseManager.shared.userExists(with: emailAddress, completion: { [weak self] exists in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard !exists else {
+                // user already exists
+                strongSelf.alertUserLoginError(message: "Looks like a user account for that email address already exists.")
+                return
+            }
+            
+            FirebaseAuth.Auth.auth().createUser(withEmail: emailAddress, password: password, completion: { authResult, error in
+                guard authResult != nil, error == nil else {
+                    print("Error cureating user")
+                    return
+                }
+                
+                DatabaseManager.shared.insertUser(with: ChatAppUser(Name: Name, emailAddress: emailAddress))
+                
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
+        })
+    }
+    
+    @objc private func didTapChangeProfilePic() {
+        presentPhotoActionSheet()
     }
 
     func alertUserLoginError(message: String = "Please enter all information to create a new account.") {
@@ -245,14 +251,13 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
                                             handler: { [weak self] _ in
 
                                                 self?.presentCamera()
-
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Chose Photo",
                                             style: .default,
                                             handler: { [weak self] _ in
 
                                                 self?.presentPhotoPicker()
-
         }))
 
         present(actionSheet, animated: true)
@@ -279,7 +284,6 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-
         self.imageView.image = selectedImage
     }
 
