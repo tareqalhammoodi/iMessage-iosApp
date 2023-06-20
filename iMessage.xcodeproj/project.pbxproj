@@ -99,7 +99,22 @@
 			isa = PBXGroup;
 			children = (
 				B5661B482A3E15C900CC146A /* AppDelegate.swift */,
+				B5DF569A2A3E404900573A36 /* Extensions.swift */,
 				B5661B4A2A3E15C900CC146A /* SceneDelegate.swift */,
+				B5F456902A40BA750012FE6C /* DatabaseManager.swift */,
+				B5661B4E2A3E15C900CC146A /* Main.storyboard */,
+				B5661B532A3E15CB00CC146A /* LaunchScreen.storyboard */,
+				B5661B512A3E15CB00CC146A /* Assets.xcassets */,
+				B591EB372A41FB0B0070A4D5 /* Controllers */,
+				B5661B562A3E15CB00CC146A /* Info.plist */,
+				B5F4568E2A409FA20012FE6C /* GoogleService-Info.plist */,
+			);
+			path = iMessage;
+			sourceTree = "<group>";
+		};
+		B591EB372A41FB0B0070A4D5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				B5661B4C2A3E15C900CC146A /* MainViewController.swift */,
 				B5DF56942A3E39E600573A36 /* VideoPlayerViewController.swift */,
 				B5DF56922A3E39CF00573A36 /* PhotoViewerViewController.swift */,
@@ -107,15 +122,8 @@
 				B5DF568E2A3E398200573A36 /* LoginViewController.swift */,
 				B5DF56982A3E3A3900573A36 /* ProfileViewController.swift */,
 				B5DF56962A3E3A1300573A36 /* NewConversationViewController.swift */,
-				B5DF569A2A3E404900573A36 /* Extensions.swift */,
-				B5F456902A40BA750012FE6C /* DatabaseManager.swift */,
-				B5661B4E2A3E15C900CC146A /* Main.storyboard */,
-				B5661B512A3E15CB00CC146A /* Assets.xcassets */,
-				B5661B532A3E15CB00CC146A /* LaunchScreen.storyboard */,
-				B5661B562A3E15CB00CC146A /* Info.plist */,
-				B5F4568E2A409FA20012FE6C /* GoogleService-Info.plist */,
 			);
-			path = iMessage;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

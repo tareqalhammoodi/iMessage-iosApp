@@ -169,7 +169,7 @@ class LoginViewController: UIViewController {
                                    width: scrollView.width-60,
                                    height: 45)
         createAccountLabel.frame = CGRect(x: 30,
-                                    y: loginButton.top+325,
+                                    y: loginButton.top+350,
                                     width: scrollView.width-60,
                                     height: 35)
         
