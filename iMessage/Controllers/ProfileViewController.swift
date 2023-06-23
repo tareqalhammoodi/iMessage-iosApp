@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
         let fileName = safeEmail + "_profile_picture.png"
         let path = "images/"+fileName
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 500))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.width, height: 300))
         headerView.backgroundColor = .white
         let imageView = UIImageView(frame: CGRect(x: (headerView.width-150)/2, y: 75, width: 150, height: 150))
         imageView.contentMode = .scaleAspectFill
@@ -55,7 +55,6 @@ class ProfileViewController: UIViewController {
             guard let data = data, error == nil else {
                 return
             }
-            
             DispatchQueue.main.async {
                 let image = UIImage(data: data)
                 imageView.image = image
