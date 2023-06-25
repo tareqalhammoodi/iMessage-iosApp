@@ -105,7 +105,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         if isNewConversation {
             // create conversation in database
             let message = Message(sender: selfSender, messageId: messageID, sentDate: Date(), kind: .text(text))
-            DatabaseManager.shared.createNewConversation(with: otherUserEmail, firstMessage: message, completion: { success in
+            DatabaseManager.shared.createNewConversation(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
                 if success {
                     print("message sent")
                 } else {
@@ -114,7 +114,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
             })
         } else {
             // append to existing conversation data
-            
         }
     }
     
@@ -144,6 +143,4 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func numberOfSections(in messagesCollectionView: MessageKit.MessagesCollectionView) -> Int {
         return messages.count
     }
-    
-    
 }
