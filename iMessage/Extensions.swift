@@ -48,7 +48,3 @@ extension UIView {
         self.layer.addSublayer(border)
     }
 }
-
-extension Notification.Name {
-    static let didLogInNotification = Notification.Name("didLoginNotification")
-}
