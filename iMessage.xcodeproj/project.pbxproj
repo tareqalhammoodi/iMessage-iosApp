@@ -16,6 +16,7 @@
 		B5661B552A3E15CB00CC146A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5661B532A3E15CB00CC146A /* LaunchScreen.storyboard */; };
 		B5849C922A445DD10070E4EA /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5849C912A445DD10070E4EA /* StorageManager.swift */; };
 		B591EB392A438AB40070A4D5 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B591EB382A438AB40070A4D5 /* ChatViewController.swift */; };
+		B599F8822A4A7A8A004C33C8 /* NewConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B599F8812A4A7A8A004C33C8 /* NewConversationCell.swift */; };
 		B59CA1072A47B93A00D9D4BC /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CA1062A47B93A00D9D4BC /* ConversationTableViewCell.swift */; };
 		B5DF568F2A3E398200573A36 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF568E2A3E398200573A36 /* LoginViewController.swift */; };
 		B5DF56912A3E39AE00573A36 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF56902A3E39AE00573A36 /* RegisterViewController.swift */; };
@@ -41,6 +42,7 @@
 		B5661B562A3E15CB00CC146A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5849C912A445DD10070E4EA /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		B591EB382A438AB40070A4D5 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B599F8812A4A7A8A004C33C8 /* NewConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationCell.swift; sourceTree = "<group>"; };
 		B59CA1062A47B93A00D9D4BC /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		B5DF568E2A3E398200573A36 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B5DF56902A3E39AE00573A36 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				B5661B4A2A3E15C900CC146A /* SceneDelegate.swift */,
 				B5F456902A40BA750012FE6C /* DatabaseManager.swift */,
 				B5849C912A445DD10070E4EA /* StorageManager.swift */,
+				B599F8812A4A7A8A004C33C8 /* NewConversationCell.swift */,
 				B59CA1062A47B93A00D9D4BC /* ConversationTableViewCell.swift */,
 				B5661B4E2A3E15C900CC146A /* Main.storyboard */,
 				B5661B532A3E15CB00CC146A /* LaunchScreen.storyboard */,
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5DF568F2A3E398200573A36 /* LoginViewController.swift in Sources */,
+				B599F8822A4A7A8A004C33C8 /* NewConversationCell.swift in Sources */,
 				B5F456912A40BA750012FE6C /* DatabaseManager.swift in Sources */,
 				B5DF56912A3E39AE00573A36 /* RegisterViewController.swift in Sources */,
 				B5DF56972A3E3A1300573A36 /* NewConversationViewController.swift in Sources */,
@@ -412,6 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96WMW6M3DG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMessage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -443,6 +448,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 96WMW6M3DG;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iMessage/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
