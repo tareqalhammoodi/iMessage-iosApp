@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Create a new account"
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor = UIColor(named: "black_and_white")
         label.font = UIFont(name:"Avenir-Medium", size: 24.0)
         return label
     }()
@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
         let label = UILabel()
         label.text = "Create an account to enjoy using iMessage."
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor = UIColor(named: "black_and_white")
         label.font = UIFont(name:"Avenir-Light", size: 16.0)
         return label
     }()
@@ -83,7 +83,7 @@ class RegisterViewController: UIViewController {
     private let registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create an account", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = UIColor(named: "black_and_gray")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 20
         button.layer.masksToBounds = true
@@ -198,6 +198,8 @@ class RegisterViewController: UIViewController {
                     print("Error cureating user")
                     return
                 }
+                UserDefaults.standard.setValue(Name, forKey: "name")
+                UserDefaults.standard.setValue(emailAddress, forKey: "email")
                 let chatUser = ChatAppUser(Name: Name, emailAddress: emailAddress)
                 DatabaseManager.shared.insertUser(with: chatUser, completion: { success in
                     if success {

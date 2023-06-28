@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
 
     private let tableView: UITableView = {
         let table = UITableView()
-        //table.isHidden = true
+        table.isHidden = true
         table.register(ConversationTableViewCell.self, forCellReuseIdentifier: ConversationTableViewCell.identifier)
         return table
     }()
@@ -38,7 +38,7 @@ class MainViewController: UIViewController {
         label.textAlignment = .center
         label.textColor = .gray
         label.font = UIFont(name:"Avenir-Heavy", size: 20.0)
-        //label.isHidden = true
+        label.isHidden = true
         return label
     }()
     
@@ -51,13 +51,16 @@ class MainViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
         setupTableView()
-        fetchConversations()
         updateConversations()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        noConversationsLabel.frame = CGRect(x: view.width/4,
+                                      y: (view.height-200)/2,
+                                      width: view.width/2,
+                                      height: 200)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -76,13 +79,19 @@ class MainViewController: UIViewController {
             case .success(let conversations):
                 print("successfully downloaded conversations")
                 guard !conversations.isEmpty else {
+                    self?.tableView.isHidden = true
+                    self?.noConversationsLabel.isHidden = false
                     return
                 }
+                self?.tableView.isHidden = false
+                self?.noConversationsLabel.isHidden = true
                 self?.conversations = conversations
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             case .failure(let error):
+                self?.tableView.isHidden = true
+                self?.noConversationsLabel.isHidden = false
                 print("failed to get conversations: \(error)")
             }
         })
@@ -100,10 +109,7 @@ class MainViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    private func fetchConversations() {
-        
+        tableView.separatorColor = .gray
     }
     
     @objc private func composeButtonTapped() {
@@ -191,12 +197,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let conversationID = conversations[indexPath.row].id
+            let conversationId = conversations[indexPath.row].id
             tableView.beginUpdates()
-            DatabaseManager.shared.deleteConversation(conversationID: conversationID , completion: { [weak self] success in
-                if success {
-                    self?.conversations.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+            DatabaseManager.shared.deleteConversation(conversationID: conversationId, completion: { success in
+                if !success {
+                    print("failed to delete")
                 }
             })
             tableView.endUpdates()

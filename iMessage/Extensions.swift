@@ -42,9 +42,9 @@ extension UIView {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: 0,
-                              y: self.frame.size.height - width,
-                              width: self.frame.size.width - 25,
+                              y: frame.size.height - width,
+                              width: frame.size.width - 25,
                               height: width)
-        self.layer.addSublayer(border)
+        layer.addSublayer(border)
     }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseDatabase
 import MessageKit
+import CoreLocation
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -288,8 +289,7 @@ extension DatabaseManager {
                                       placeholderImage: placeHolder,
                                       size: CGSize(width: 250, height: 250))
                     kind = .photo(media)
-                }
-                 else if type == "video" {
+                } else if type == "video" {
                     // video
                     guard let videoUrl = URL(string: content),
                         let placeHolder = UIImage(systemName: "video.slash") else {
@@ -300,6 +300,15 @@ extension DatabaseManager {
                                       placeholderImage: placeHolder,
                                       size: CGSize(width: 250, height: 250))
                     kind = .video(media)
+                } else if type == "location" {
+                    // location
+                    let locationComponents = content.components(separatedBy: ",")
+                    guard let longitude = Double(locationComponents[0]),
+                          let latitude = Double(locationComponents[1]) else {
+                        return nil
+                    }
+                    let location = Location(location: CLLocation(latitude: latitude, longitude: longitude), size: CGSize(width: 250, height: 150))
+                    kind = .location(location)
                 } else {
                     // text
                     kind = .text(content)
@@ -348,7 +357,9 @@ extension DatabaseManager {
                     message = targetUrlString
                 }
                 break
-            case .location(_):
+            case .location(let locationData):
+                let location = locationData.location
+                message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
                 break
             case .emoji(_):
                 break

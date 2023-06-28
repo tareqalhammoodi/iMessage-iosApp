@@ -29,7 +29,7 @@ class NewConversationViewController: UIViewController {
     
     private let noResultsLabel: UILabel = {
         let label = UILabel()
-        label.text = "No Results"
+        label.text = "No Results!"
         label.isHidden = true
         label.textAlignment = .center
         label.textColor = .gray
@@ -44,7 +44,7 @@ class NewConversationViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         searchBar.delegate = self
         navigationController?.navigationBar.topItem?.titleView = searchBar
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel",

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         let proxy = UINavigationBar.appearance()
-        proxy.tintColor = .black
+        proxy.tintColor = UIColor(named: "black_and_white")
         proxy.standardAppearance = appearance
         proxy.scrollEdgeAppearance = appearance
         

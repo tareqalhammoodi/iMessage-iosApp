@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "Welcome!"
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor = UIColor(named: "black_and_white")
         label.font = UIFont(name:"Avenir-Heavy", size: 24.0)
         return label
     }()
@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "Enter your email and password to login."
         label.textAlignment = .left
-        label.textColor = .black
+        label.textColor = UIColor(named: "black_and_white")
         label.font = UIFont(name:"Avenir-Light", size: 16.0)
         return label
     }()
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
         button.setTitle("Forgot Password?", for: .normal)
         button.contentHorizontalAlignment = .right
         button.backgroundColor = .clear
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(named: "black_and_white"), for: .normal)
         button.titleLabel?.font = UIFont(name:"Avenir-Heavy", size: 16.0)
         return button
     }()
@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Login", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = UIColor(named: "black_and_gray")
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 20
         button.layer.masksToBounds = true
@@ -84,14 +84,14 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "Don’t have an account? Create new one."
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .gray
         label.font = UIFont(name:"Avenir-Light", size: 16.0)
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         loginButton.addTarget(self,
                               action: #selector(loginButtonTapped),
@@ -126,7 +126,8 @@ class LoginViewController: UIViewController {
         // Define the attributes for the clickable range
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont(name:"Avenir-Heavy", size: 16.0) as Any,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .foregroundColor: UIColor(named: "black_and_white") ?? .gray
         ]
         
         // Apply the attributes to the clickable range
@@ -194,6 +195,7 @@ class LoginViewController: UIViewController {
             
             guard let result = authResult, error == nil else {
                 print("Failed to log in user with email: \(email)")
+                self?.alertUserLoginError()
                 return
             }
             
@@ -231,7 +233,7 @@ class LoginViewController: UIViewController {
     
     func alertUserLoginError() {
         let alert = UIAlertController(title: "Woops",
-                                      message: "Please enter all information to log in.",
+                                      message: "Please make sure your email and password are correct to log in.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title:"Dismiss",
                                       style: .cancel, handler: nil))

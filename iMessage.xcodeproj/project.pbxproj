@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CAEA66FF050FC543C9B28CA /* Pods_iMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C9437EA44B6FC6773450E4 /* Pods_iMessage.framework */; };
+		B55CA9242A4B745C0016CFCB /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55CA9232A4B745C0016CFCB /* LocationPickerViewController.swift */; };
 		B5661B492A3E15C900CC146A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5661B482A3E15C900CC146A /* AppDelegate.swift */; };
 		B5661B4B2A3E15C900CC146A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5661B4A2A3E15C900CC146A /* SceneDelegate.swift */; };
 		B5661B4D2A3E15C900CC146A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5661B4C2A3E15C900CC146A /* MainViewController.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		62C9437EA44B6FC6773450E4 /* Pods_iMessage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMessage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89D08BFAF0429D6CCD34E346 /* Pods-iMessage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMessage.release.xcconfig"; path = "Target Support Files/Pods-iMessage/Pods-iMessage.release.xcconfig"; sourceTree = "<group>"; };
+		B55CA9232A4B745C0016CFCB /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		B5661B452A3E15C900CC146A /* iMessage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5661B482A3E15C900CC146A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5661B4A2A3E15C900CC146A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				B5DF568E2A3E398200573A36 /* LoginViewController.swift */,
 				B5DF56982A3E3A3900573A36 /* ProfileViewController.swift */,
 				B5DF56962A3E3A1300573A36 /* NewConversationViewController.swift */,
+				B55CA9232A4B745C0016CFCB /* LocationPickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				B591EB392A438AB40070A4D5 /* ChatViewController.swift in Sources */,
 				B5DF56932A3E39CF00573A36 /* PhotoViewerViewController.swift in Sources */,
 				B5849C922A445DD10070E4EA /* StorageManager.swift in Sources */,
+				B55CA9242A4B745C0016CFCB /* LocationPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
